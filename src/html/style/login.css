@@ -1,0 +1,80 @@
+.closeShowBox {
+  padding: 0.13333333rem 0;
+}
+.closeShowBox .closeLogin {
+  width: 0.32rem;
+  height: 0.32rem;
+  background: url(../images/loginClore.png) no-repeat;
+  background-size: 100%;
+  font-size: 0.32rem;
+  vertical-align: text-top;
+  margin-left: 0.08888889rem;
+  color: #31cf80;
+}
+.L-tabMune {
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid #d4d4d4;
+}
+.L-tabMune li {
+  color: #23cc77;
+  font-size: 0.2rem;
+  width: 50%;
+  height: 0.48rem;
+  line-height: 0.48rem;
+  text-align: center;
+  float: left;
+}
+.L-tabMune .active {
+  font-weight: bold;
+  border-bottom: 0.02666667rem solid #23cc77;
+}
+.nomlogin {
+  padding: 0;
+}
+.nomlogin .CommonLogin {
+  width: 4rem;
+  margin: 0 auto;
+  overflow: hidden;
+  font-size: 0.21333333rem;
+}
+.nomlogin .CommonLogin .inputBox-g {
+  padding: 0.08888889rem 0;
+  width: 100%;
+  border-bottom: 0.01333333rem solid #d4d4d4;
+  text-align: center;
+  margin: 0.35555556rem 0;
+}
+.nomlogin .CommonLogin .inputBox-g .normalNum {
+  width: 100%;
+  height: 0.61333333rem;
+  border: 0;
+  font-size: 0.21333333rem;
+}
+.nomlogin .CommonLogin .free-login a {
+  color: #000;
+  font-size: 0.16rem;
+}
+.nomlogin .CommonLogin .loginBtnBox {
+  width: 100%;
+  text-align: center;
+}
+.nomlogin .CommonLogin .loginBtnBox .loginBtn {
+  width: 3.11111111rem;
+  height: 0.57777778rem;
+  border: 0;
+  border-radius: 0.04444444rem;
+  margin: 0.26666667rem auto;
+  background: #bdefd6;
+  font-size: 0.21333333rem;
+  color: #fff;
+}
+.nomlogin .CommonLogin .forGetPass {
+  width: 100%;
+  height: 0.26666667rem;
+  font-size: 0.16888889rem;
+  text-align: center;
+}
+.nomlogin .CommonLogin .forGetPass a {
+  color: #666666;
+}

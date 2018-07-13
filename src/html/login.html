@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>会员登录</title>
+		<script>
+		//动态设置像素比
+			var drp = 1 / window.devicePixelRatio;
+			document.write('<meta name="viewport" content="width=device-width,initial-scale=' + drp + ',minimum-scale=' + drp + ',maximum-scale=' + drp + ',user-scalable=no" />')
+			//动态设置HTML的大小（rem）
+			var fz = document.documentElement.clientWidth / 5;
+			document.getElementsByTagName('html')[0].style.fontSize = fz + 'px';
+		</script>
+	<link rel="stylesheet" type="text/css" href="style/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="style/tools.css"/>
+		<link rel="stylesheet" type="text/css" href="style/global.css"/>
+		<link rel="stylesheet" type="text/css" href="style/login.css"/>
+		
+		
+	</head>
+	<body>
+			
+		<header>
+		
+			<div class="closeShowBox">
+				<div class="closeLogin">
+					
+				
+					
+					
+				</div>
+				
+			</div>
+		</header>
+		
+		
+		<section>
+			
+			<ul class="L-tabMune">
+				<li class="active">途牛账号登录</li>
+				<li>动态密码登录</li>
+				
+				
+			</ul>
+		
+			
+	
+			
+		</section>
+		<section class="nomlogin">
+				<form class="CommonLogin">
+					<div class="inputBox-g">
+						<input id="nameNum" class="normalNum" type="text" placeholder="手机号/会员名/昵称/邮箱"/>
+						
+					</div>
+					
+					<div class="inputBox-g">
+						<input id="passNum" class="normalNum" type="password" placeholder="密码"/>
+						
+					</div>
+					
+					<div class="free-login">
+						<a href="#">
+							国际手机号码登录
+							
+						</a>
+						<div class="fr">
+								<input type="radio" />
+						
+						<a href="#">
+							国际手机号码登录
+							
+						</a>
+							
+						</div>
+					
+						
+						
+					</div>
+					<div class="loginBtnBox">
+							<button class="loginBtn">
+						登陆
+						
+					</button>
+						
+					</div>
+					
+					<div class="forGetPass">
+						<a href="#">注册新用户</a> | <a href="#">忘记密码</a>
+						
+					</div>
+				
+	
+				
+			</form>
+		</section>
+		
+		
+		<footer class="foot">
+			
+			
+			
+		</footer>
+		
+		
+	</body>
+</html>

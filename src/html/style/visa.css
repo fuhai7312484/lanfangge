@@ -1,0 +1,132 @@
+.content .visaBanner {
+  width: 100%;
+  height: 1.66666667rem;
+  position: relative;
+}
+.content .visaBanner .visaBtns {
+  position: absolute;
+  width: 100%;
+  height: 0.10666667rem;
+  left: 0;
+  bottom: 0.13333333rem;
+  font-size: 0;
+  text-align: center;
+}
+.content .visaBanner .visaBtns a {
+  display: inline-block;
+  width: 0.10666667rem;
+  height: 0.10666667rem;
+  border-radius: 0.05333333rem;
+  background: #fff;
+  margin: 0 0.04444444rem;
+}
+.content .visaBanner .visaBtns .visaactive {
+  background: #ff8a00;
+}
+.content .visaBanner img {
+  width: 100%;
+}
+.content .visa-country {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: space-between;
+  flex-wrap: wrap;
+}
+.content .visa-country li {
+  width: 1.46666667rem;
+  height: 1.6rem;
+  float: left;
+}
+.content .visa-country li .countryImg {
+  width: 1.46666667rem;
+  height: 1.09777778rem;
+  font-size: 0;
+  position: relative;
+}
+.content .visa-country li .countryImg img {
+  width: 100%;
+}
+.content .visa-country li .countryImg .countryName {
+  width: 100%;
+  font-size: 0.16rem;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: 0.08888889rem;
+}
+.content .visa-country li .countryPrice {
+  height: 0.32rem;
+  width: 100%;
+  font-size: 0.16rem;
+  color: #f77333;
+  text-align: center;
+  line-height: 0.32rem;
+}
+.content .visa-country li .countryPrice strong {
+  font-size: 0.21333333rem;
+}
+.content .progressBox {
+  overflow: hidden;
+}
+.content .progressBox .visa-index-progress {
+  width: 1.61333333rem;
+  height: 2.04rem;
+  border-right: 0.00444444rem solid #dddddd;
+  text-align: center;
+  font-size: 0.19555556rem;
+  color: #222;
+}
+.content .progressBox .visa-index-progress .step1Text {
+  padding-top: 0.22222222rem;
+  padding-bottom: 0.22222222rem;
+  height: 0.17777778rem;
+}
+.content .progressBox .visa-index-progress .visaLogin a {
+  display: inline-block;
+  border-radius: 0.02666667rem;
+  border: 0.00444444rem solid #2dbb55;
+  border-radius: 0.04444444rem;
+  padding: 0.05333333rem 0.06666667rem;
+  color: #2dbb55;
+}
+.content .progressBox .box-steps {
+  height: 2.04rem;
+  width: 3.33333333rem;
+}
+.content .progressBox .box-steps .icon-title-back {
+  overflow: hidden;
+  font-size: 0.16rem;
+  height: 1.02rem;
+  border-bottom: 0.00444444rem solid #eeeeee;
+  display: block;
+}
+.content .progressBox .box-steps .icon-title-back .img-step2 {
+  width: 0.45333333rem;
+  height: 0.45333333rem;
+  margin: 0.21333333rem 0.21333333rem;
+}
+.content .progressBox .box-steps .icon-title-back .img-step2 img {
+  width: 100%;
+}
+.content .progressBox .box-steps .icon-title-back .txt-tt {
+  color: #222;
+  font-size: 0.20444444rem;
+  margin-top: 0.13333333rem;
+}
+.content .progressBox .box-steps .icon-title-back .txt2 {
+  height: 0.44rem;
+  line-height: 0.44rem;
+  font-size: 0.17777778rem;
+  color: #333;
+}
+.content .progressBox .box-steps .icon-title-back .txt2 .txt-n {
+  font-style: normal;
+  color: #2dbb55 ;
+}
+.content .progressBox .box-steps .icon-title-back span {
+  display: block;
+}

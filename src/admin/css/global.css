@@ -1,0 +1,152 @@
+
+.custom-trigger{
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 16px;
+    cursor: pointer;
+    -webkit-transition: color .3s;
+    -o-transition: color .3s;
+    transition: color .3s;
+  }
+  
+
+
+  .ant-layout .logo{
+    height: 63px;
+    background: #fff;
+    padding:10px 10px 10px 25px;
+
+
+
+  }
+.ant-layout-sider{
+background: #1c2b36;
+
+}
+
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub{
+
+  background: #1c2b36;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+background: #218388;
+border: 1px solid #3c9ba0;
+box-sizing: border-box;
+
+}
+.ant-menu-item a{
+  display: block;
+  width: 100%;
+  height: 100%;
+
+}
+  .ant-menu-item span a{
+    color:#fff
+
+  }
+
+  .ant-dropdown-link{
+
+    margin-left:10px;
+    margin-right:10px;
+     
+  }
+
+.ant-form-margin{
+
+  margin-bottom:5px; 
+
+}
+
+/*首页样式*/
+
+ .pb-m{
+  padding-bottom: 1rem !important;
+
+ }  
+
+ .card-tool {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+}
+.anticon {
+  display: inline-block;
+  font-style: normal;
+  vertical-align: baseline;
+  text-align: center;
+  text-transform: none;
+  line-height: 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* .y-center{ text-align: center;} */
+.text-2x{
+  font-size: 2rem;
+}
+ul.list-group{
+   margin: 0;
+   padding: 0;
+   background: #ECECEC;
+   border-radius:4px; 
+   overflow: hidden;
+}
+.list-group .list-group-item {
+  position: relative;
+  display: block;
+  margin-bottom: -1px;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1px solid #ddd;
+  border-color: rgba(120, 130, 140, 0.065);
+  border-width: 1px 0;
+}
+.list-reply-btn{ position: absolute;
+bottom: 10px; right: 10px;}
+.w-40 {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+}
+.replied{
+  color:#ccc;
+  border-style: dashed;
+}
+.index-reply-form{
+  margin: 10px 0;
+}
+.pull-left {
+  float: left;
+}
+.mr-m {
+  margin-right: 1rem !important;
+}
+.img-circle {
+  border-radius: 50%;
+}
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+.clear {
+  display: block;
+  overflow: hidden;
+}
+.block {
+  display: block;
+  position: relative;
+}
+a.block time{
+text-align: right;
+position: absolute;
+right: 0; top: 0;
+color: #ccc;
+font-size:10px;
+
+}
+.text-muted {
+  opacity: .6;
+}

@@ -1,0 +1,486 @@
+@rem : 225rem;
+html {
+    overflow: hidden;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    overflow-y: auto;
+}
+
+
+.head {
+    background: #5eb861;
+    width: 100%;
+    height: 150/@rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    border-top: 1/@rem solid #3d8641;
+    box-sizing: border-box;
+    overflow: hidden;
+    .H-line {
+        width: 23/@rem;
+        height: 15/@rem;
+        background: url(../images/h-line.jpg) no-repeat;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .logo {
+        background: #000;
+        height: 150/@rem;
+        width: 156/@rem;
+        background: url(../images/logo.jpg) no-repeat;
+        background-position: 28/@rem 33/@rem ;
+        background-size: 87/@rem 93/@rem;
+    }
+    .headCity {
+        color: #fff;
+        height: 149/@rem;
+        width: 137/@rem;
+        font-size: 45/@rem;
+        line-height: 150/@rem;
+    }
+    .h-search {
+        width: 507/@rem;
+        height: 90/@rem;
+        background: #fff;
+        border-radius: 5/@rem;
+        margin: 29/@rem 0 0 23/@rem;
+        box-sizing: border-box;
+        padding-left: 30/@rem;
+        color: #c5c5c5;
+        font-size: 40/@rem;
+        line-height: 90/@rem;
+        .h-search-ico {
+            display: inline-block;
+            width: 43/@rem;
+            height: 38/@rem;
+            background: url(../images/h-search-ico.jpg) no-repeat;
+            background-size: 43/@rem 38/@rem;
+            vertical-align: text-top;
+        }
+    }
+    .h-login {
+        display: block;
+        width: 65/@rem;
+        height: 66/@rem;
+        background: url(../images/h-login-btn.jpg) no-repeat;
+        background-size: 100%;
+        margin: 42/@rem 0 0 40/@rem;
+    }
+    .headRigthNav {
+        color: #fff;
+        height: 149/@rem;
+        width: 137/@rem;
+        font-size: 45/@rem;
+        line-height: 150/@rem;
+        margin-right: 28/@rem;
+    }
+
+     .go_to_home{
+         width: 147/@rem;
+          height:150/@rem;
+         
+            display: block;
+             font-size:0 ;
+            
+             i{
+                  display: inline-block;
+             background: url(../images/go-to-home.jpg) no-repeat;
+             background-size:100%;
+              width:66/@rem;
+               height: 67/@rem;
+               background-size:100%;
+                margin:45/@rem 0 0 45/@rem ;
+
+                    }
+            
+            
+           
+        
+        
+    }
+    .go-to-search{
+         width: 132/@rem;
+          height:150/@rem;
+         
+            display: block;
+             font-size:0 ;
+        
+         i{
+                  display: inline-block;
+             background: url(../images/goto-search.jpg) no-repeat;
+             background-size:100%;
+              width:66/@rem;
+               height: 67/@rem;
+               background-size:100%;
+                margin:45/@rem 0 0 30/@rem ;
+                  
+              
+                
+                    }
+        
+    }
+    
+   .head-title{
+       
+      
+         height: 150/@rem;
+         width:507/@rem;
+          color:#fff;
+           line-height: 150/@rem;
+            font-size:51/@rem;
+             text-align: center;
+        
+       
+   }
+    
+    
+}
+
+.content{
+    
+ background: #f0f0f0;
+   
+    width: 100%;
+    margin-top: 142/@rem;
+    color: #fff;
+   
+
+     .channel_title{
+         
+         height:108/@rem;
+          width:100%;
+         
+          
+           box-sizing: border-box;
+            color: #222;
+            font-size:42/@rem;
+            padding-left:36/@rem ;
+            line-height: 108/@rem;
+           
+          
+         
+         
+     }
+     
+     
+     
+     
+     
+     
+      .categories {
+        width: 100%;
+        height: 134/@rem;
+        border-bottom: 2/@rem solid #e8e8e8;
+        .Catactive {
+            border-bottom: 6/@rem solid #5eb75d;
+            a {
+                color: #5eb75d;
+            }
+        }
+        li {
+            width: 25%;
+            height: 130/@rem;
+            font-size: 0;
+            line-height: 134/@rem;
+            float: left;
+            text-align: center;
+            a {
+                font-size: 44/@rem;
+                color: #212121;
+            }
+        }
+    }
+     
+     
+     
+    .subNavlists {
+        height: 254/@rem;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        align-content: space-around;
+    
+        a {
+            display: block;
+            float: left;
+            width: 215/@rem;
+            margin: 0 30/@rem;
+            height: 72/@rem;
+            border: 3/@rem solid #f6f6f8;
+            background: #f6f6f8;
+            font-size: 35/@rem;
+            text-align: center;
+            line-height: 72/@rem;
+            color: #656567;
+        
+        }
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+      .product-item {
+        width: 100%;
+        .TtemsImg {
+            width: 100%;
+            height: 450/@rem;
+            position: relative;
+            overflow: hidden;
+            img {
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .product-extra {
+                position: absolute;
+                top: 45/@rem;
+                left: 30/@rem;
+                background: rgba(0, 0, 0, .7);
+                height: 72/@rem;
+                padding: 0 46/@rem;
+                border-radius: 36/@rem;
+                line-height: 72/@rem;
+                color: #fff;
+                font-size: 34/@rem ;
+                &::before {
+                    content: "";
+                    background: url(../images/qizhi.png) no-repeat;
+                    background-size: 100%;
+                    width: 36/@rem;
+                    height: 36/@rem;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+            .sati-peo {
+                position: absolute;
+                right: 34/@rem;
+                bottom: 30/@rem;
+                height: 34/@rem;
+                font-size: 0;
+                span {
+                    margin: 0 14/@rem;
+                    color: #fff;
+                    font-size: 34/@rem;
+                }
+            }
+            .product-price {
+                width: 270/@rem;
+                height: 150/@rem;
+                border-radius: 10/@rem;
+                position: absolute;
+                left: 31/@rem;
+                bottom: 31/@rem;
+                overflow: hidden;
+                color: #fff;
+                font-weight: bold;
+                text-align: center;
+                .priceTop {
+                    height: 90/@rem;
+                    font-size: 30/@rem;
+                    line-height: 90/@rem;
+                    background: #ee7f30;
+                    b {
+                        font-size: 36/@rem;
+                    }
+                }
+                .priceBottom {
+                    height: 60/@rem;
+                    background: #484848;
+                    font-size: 34/@rem;
+                }
+            }
+        }
+        
+        .TtemsTitleBox{
+            padding-top: 30/@rem;
+            padding-bottom:30/@rem ;
+            
+            .product-title{
+                height: 67/@rem;
+                 line-height: 67/@rem;
+                  font-size: 0;
+                a{
+                     color: #222;
+                      font-size: 45/@rem;
+                      
+                    
+                }
+                
+                
+            }
+            
+            
+            .product-describe{
+                
+                 color: #222;
+                  font-size: 36/@rem;
+                  height: 58/@rem;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;  
+                  line-height: 58/@rem;   
+                               
+                
+            }
+            
+            .product-tags{
+                 font-size: 0;
+                  padding-top:16/@rem;
+                  padding-bottom:16/@rem ;
+                 .gray{
+                     color: #cacaca;
+                      border:2/@rem solid #cacaca;
+                 }
+                 .red{
+                     color: #ec7976;
+                      border:2/@rem solid #ec7976;
+                     
+                 }
+                 .orange{
+                     
+                      color: #f2a03d;
+                      border:2/@rem solid #f2a03d;
+                 }
+                a{
+                    
+                    display: inline-block;
+                    height:41/@rem;
+                    border:2/@rem solid #cacaca;
+                     color: #cacaca;
+                     font-size:28/@rem; text-align: center;
+                      line-height: 41/@rem;
+                       padding:0 7/@rem;
+                        border-radius:6/@rem;
+                        margin-right:10/@rem ;
+                        vertical-align: middle;
+                        .przs{
+                            background: url(../images/przs.jpg) no-repeat;
+                            background-size:100%;
+                            vertical-align:  text-top;
+                             margin:3/@rem 0 0 3/@rem ;
+                             height: 28/@rem;
+                             width: 33/@rem;
+                              display: inline-block;
+                            
+                        }
+                }
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        .product-commentBox{
+            
+            background: #fdfaf5;
+            width: 100%;
+             height: 96/@rem;
+            
+            .product-comment{
+                 height: 96/@rem;
+                  line-height: 96/@rem;
+                 font-size:34/@rem ;
+                  color: #353430;
+                  img{
+                      
+                        vertical-align: middle;
+                         margin-top: 16/@rem;
+                  }
+                  .evaluate{
+                       
+                        text-overflow: ellipsis;
+                         width: 850/@rem;
+                        white-space: nowrap;
+                     overflow: hidden;
+                     
+                     
+                     
+                      &::before {
+                    content: "";
+                    color: #fef3e1;
+                    width: 35/@rem;
+                    height: 20/@rem;
+                    background: url(../images/shangyin.jpg) no-repeat;
+                    background-size: 100%;
+                    display: inline-block;
+                    vertical-align: text-top;
+                    margin:0 22/@rem;
+                }
+                &::after {
+                    content: "";
+                    width: 35/@rem;
+                    height: 20/@rem;
+                    display: inline-block;
+                    vertical-align:  text-top;
+                    background: url(../images/xiayin.jpg) no-repeat;
+                    background-size: 100%;
+                    margin: 0 22/@rem;
+                }
+                     
+                     
+                      
+                      
+                  }
+                
+                
+            }
+            
+        }
+            
+    }
+    
+    
+    
+     
+            .i-floorFoot {
+            width: 100%;
+            height: 140/@rem;
+            line-height: 140/@rem;
+             font-size: 0;
+            text-align: center;
+            a {
+                color: #5db662;
+                font-size: 36/@rem;
+                font-weight: bold;
+                .i-floorIco {
+                    display: inline-block;
+                    width: 39/@rem;
+                    height: 39/@rem;
+                    background: url(../images/i-floorFoot.jpg) no-repeat;
+                    background-size: 100%;
+                    vertical-align: middle;
+                }
+            }
+        }
+     
+     
+     
+     
+     
+    
+}

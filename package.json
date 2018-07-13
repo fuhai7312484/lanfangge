@@ -1,0 +1,28 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.6.5",
+    "bootstrap": "^3.3.7",
+    "echarts": "^4.1.0",
+    "echarts-for-react": "^2.0.13",
+    "jquery": "^3.3.1",
+    "react": "^16.4.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "file-loader": "^1.1.11",
+    "url": "^0.11.0",
+    "url-loader": "^1.0.1"
+  }
+}

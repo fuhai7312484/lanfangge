@@ -1,0 +1,15 @@
+body,
+h1,
+h2,
+h5,
+ul {
+  margin: 0;
+  padding: 0;
+}
+a {
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}

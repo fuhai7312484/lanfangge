@@ -1,0 +1,135 @@
+.content .non-swipe {
+  width: 100%;
+  height: 1.53333333rem;
+}
+.content .non-swipe img {
+  width: 100%;
+}
+.content .swipe-box {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row ;
+  justify-content: space-around;
+  flex-wrap: wrap ;
+  align-items: flex-start;
+  align-content: space-around;
+}
+.content .swipe-box li {
+  margin-top: 0.24rem;
+  width: 25%;
+  height: 0.82666667rem;
+  float: left;
+  font-size: 0;
+  text-align: center;
+}
+.content .swipe-box li i {
+  display: block;
+  width: 0.53333333rem;
+  height: 0.53333333rem;
+  margin: 0 auto 0.04rem auto;
+}
+.content .swipe-box li i img {
+  width: 100%;
+}
+.content .swipe-box li a {
+  color: #222;
+  font-size: 0.16rem;
+}
+.content .swipe-pagenavi {
+  width: 100%;
+  height: 0.02666667rem;
+  font-size: 0 ;
+  text-align: center;
+  padding: 0.13333333rem 0;
+}
+.content .swipe-pagenavi a {
+  display: inline-block;
+  width: 0.2rem;
+  height: 0.02666667rem;
+  background: #eee;
+  margin: 0 0.01333333rem;
+}
+.content .swipe-pagenavi .swipe-active {
+  background: #23cc77;
+}
+.content .c-destination .channelList {
+  overflow: hidden;
+  margin-right: 0.00444444rem;
+}
+.content .c-destination .channelList li {
+  width: 25%;
+  height: 0.52rem;
+  border: 0.00444444rem solid #eeeeee;
+  float: left;
+  font-size: 0;
+  text-align: center;
+  line-height: 0.52rem;
+  box-sizing: border-box;
+  margin: 0 0 -0.00444444rem -0.00444444rem;
+}
+.content .c-destination .channelList li a {
+  font-size: 0.16rem;
+  color: #222;
+}
+.content .c-destination .channelList li a i {
+  color: #fff;
+  display: inline-block;
+  width: 0.18666667rem;
+  height: 0.18666667rem;
+  font-size: 0.16rem;
+  vertical-align: middle;
+  line-height: 0.18666667rem;
+  font-style: normal;
+  border-radius: 0.03555556rem;
+}
+.content .specialBox .special {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row ;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 0;
+}
+.content .specialBox .special li {
+  width: 2.30666667rem;
+  float: left;
+}
+.content .specialBox .special li img {
+  width: 100%;
+}
+.content .specialBox .special li .specialImg {
+  width: 100%;
+}
+.content .specialBox .special li .specialTitle {
+  height: 0.29333333rem;
+  line-height: 0.29333333rem;
+}
+.content .specialBox .special li .specialTitle a {
+  font-size: 0.16rem;
+  color: #222;
+}
+.content .specialBox .special li .specialInfo {
+  font-size: 0.16rem;
+  color: #999;
+  height: 0.29333333rem;
+  line-height: 0.29333333rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.content .specialBox .special li .specialPrice {
+  overflow: hidden;
+  font-size: 0.16rem;
+  height: 0.29333333rem;
+  line-height: 0.29333333rem;
+  color: #999;
+}
+.content .specialBox .special li .specialPrice em {
+  color: #f60;
+}
+.content .specialBox .special li .specialPrice strong {
+  color: #f60;
+  font-size: 0.21333333rem;
+}

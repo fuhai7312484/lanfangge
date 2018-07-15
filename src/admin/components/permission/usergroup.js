@@ -96,8 +96,6 @@ class Usergroup extends Component {
 
   async componentDidMount() {
     await getDataArr("group?act=get").then(data => {
-  
-
       this.setState({ groupArr: getDealKey(data.groupArr) });
     });
   }

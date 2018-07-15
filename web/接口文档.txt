@@ -1,0 +1,161 @@
+﻿使用方法：
+	1.	需要安装node / mongoDB    https://www.mongodb.com/ 安装
+
+	启动数据库:
+		找到C:\Program Files\MongoDB\Server\3.4\bin
+
+		.\mongod --dbpath=数据库存放的位置 --port=27017 
+	
+	2.	使用npm install 安装依赖项
+
+	3.	npm run dev  运行服务
+
+	4.	在http://localhost:88 访问
+
+	npm i nrm -g
+
+	nrm test  查看哪个速度快
+
+	nrm use cnpm  切换镜像
+
+	
+
+
+功能： 登陆/注册/文件上传/简易微博(添加、删除、分页、点赞、踩)
+
+
+用户登录/注册： api/user/login   api/user/register
+	post  
+		username: xxx
+		password: xxx
+	return
+		{code:0,msg:提示信息}
+
+		code:0 成功
+		code:1 失败
+
+user
+获取全部用户信息  /user
+		get    
+			users	get
+			
+添加一个新会员/user?act=add&username=username&password=password
+		email,phone,adder:String,(可选参数)
+		return 
+		code  0为成功
+		msg     提交成功
+			return 
+				code -1
+				msg 用户名不能为空
+			return 
+				code -3 
+				msg 用户名已占用不能注册
+			return 
+				code -2
+				msg 密码不能为空
+更新会员信息 /user?act=userUpdate&key=key
+删除会员 /user?act=del&id=id
+		return 
+			code 0 删除成功
+		return 	code -1 删除失败
+
+查询获取全部会员 /user?act=getAllUser
+		return code 0  查询成功
+		rerurn code -1  参数错误
+
+用户名查询单个用户 /user?act=getOneUser&username=username
+		return code -1 参数错误
+		return code -2 msg 没有找到您查询的会员
+		return  code 0 msg 查询成功
+
+
+
+	
+添加权限组接口 /group?act=add&grname=超级管理员组
+			(可选参数)&grdesc=描述
+		return code 0 msg 用户组创建成功
+		return code -3  msg 已存在的用户组
+		return code -1 msg  用户组名不能为空
+获取权限组接口 /group?act=get 不给pid直接查询所有权限组
+
+		/group?act=get&pid=0 给pid可以按照给的pid查询到 按pid的一个权限组
+删除权限组接口/group?act=delgroup&pid=0 
+
+
+
+
+
+list
+添加list数据  /list
+
+	get 
+		act		add
+		newname		输入的内容
+	return 
+		code  0为成功
+		msg     提示信息
+		newname		输入的信息
+		listid 		可选参数  listid
+查询list  /list
+
+	get 
+
+		act      get
+
+
+
+weibo
+添加数据：  /weibo
+	get
+		act		add
+		content		输入的内容
+	return
+		code   0为成功
+		msg	   提示信息
+		id		返回id
+		time	返回时间戳
+
+获取页码：  /weibo
+	get
+		act		get_page_count
+		
+	return
+		code   0为成功
+		msg	   提示信息
+		count	页码
+
+获取数据：  /api/weibo
+	get
+		act		get
+		page	页码
+	return
+		数据数组
+		若失败：
+			code   错误码
+			msg	   提示信息
+		
+
+点赞：  /api/weibo
+	get
+		act		like
+		id		id
+	return
+		code   0为成功
+		msg	   提示信息
+
+踩：  /weibo
+	get
+		act		dislike
+		id		id
+	return
+		code   0为成功
+		msg	   提示信息
+
+删除：   /weibo
+	get
+		act		del
+		id		id
+	return
+		code   0为成功
+		msg	   提示信息
+

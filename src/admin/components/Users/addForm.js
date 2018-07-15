@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { Form, Input, Modal , Row, Col } from "antd";
+import { Form, Input, Modal , Row, Col,Radio } from "antd";
 
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 
 class AddForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+     
      
     };
   }
@@ -94,6 +96,21 @@ class AddForm extends Component {
                       <Input type="password" onBlur={this.handleConfirmBlur} />
                     )}
                   </FormItem> }
+
+                   <FormItem
+          {...formItemLayout}
+          label="性别"
+        >
+          {getFieldDecorator('sex', {
+                initialValue: '男',
+              })(
+            <RadioGroup>
+              <Radio value='男'>男</Radio>
+              <Radio value='女'>女</Radio>
+             
+            </RadioGroup>
+          )}
+        </FormItem>
 
                   <FormItem {...formItemLayout} label="邮箱" hasFeedback className="ant-form-margin">
                     {getFieldDecorator("email", {

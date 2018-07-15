@@ -5,7 +5,7 @@ import ToFooter from "./Footer";
 
 import ToLeftmenu from "./Leftmenu";
 import AddUsForm from "./components/Users/addUserForm";
-import { getDataArr, strPhone, getCookie } from "./lib/myStorage.js";
+import { getDataArr, strPhone, getCookie,getDealKey,getToTime} from "./lib/myStorage.js";
 import {
   Layout,
   Icon,
@@ -44,7 +44,6 @@ class Users extends Component {
           title: "ID",
           key: "key",
           dataIndex: "key",
-          render: text => <a href="javascript:;">{text}</a>
         },
         {
           title: "用户名",
@@ -73,9 +72,23 @@ class Users extends Component {
           key: "userstate",
           dataIndex: "userstate",
           render:(text, res) => ( 
-            <Switch defaultChecked={res.userstate} onChange={()=>this.offOnclick(res.key,res.userstate)} />
+            <Switch defaultChecked={res.userstate} onChange={()=>this.offOnclick(res.id,res.userstate)} />
         
         )
+        },
+        {
+          title: "创建时间",
+          key: "time",
+          dataIndex: "time",
+          render:(text,res)=>(
+         
+            <span>
+             
+             { getToTime(res.time,'/')}
+              </span>
+           
+           )
+         
         },
         {
           title: "操作",
@@ -95,7 +108,7 @@ class Users extends Component {
               {
                 <Popconfirm
                   title="确定要删除这个用户?"
-                  onConfirm={() => this.onDelete(record.key)}
+                  onConfirm={() => this.onDelete(record.id)}
                   onCancel={this.cancel}
                   okText="确定"
                   cancelText="取消"
@@ -128,17 +141,20 @@ class Users extends Component {
 
   async componentDidMount() {
    await getDataArr("user?act=getAllUser").then(data => {
-      this.setState({ arr: data.arr });
+     console.log(getToTime(data.arr[1].time,'/'))
+    
+      this.setState({ arr:getDealKey(data.arr) });
     });
-    console.log(this.arr)
+  
   }
 
   //激活会员状态事件
    offOnclick= async (key,checked)=>{
+     console.log(key)
     await getDataArr('user?act=updataState&key='+ key +'&userstate='+ (!checked)).then(data => {
       message.success(data.msg);
       getDataArr("user?act=getAllUser").then(data => {
-        this.setState({ arr: data.arr });
+        this.setState({ arr: getDealKey(data.arr) });
       });
     });
 
@@ -203,12 +219,12 @@ class Users extends Component {
     if (!val) {
       this.error("请输入用户名！！");
       getDataArr("user?act=getAllUser").then(data => {
-        this.setState({ arr: data.arr });
+        this.setState({ arr: getDealKey(data.arr) });
       });
     } else {
       getDataArr("user?act=getOneUser&username=" + val).then(data => {
         if (data.code === 0) {
-          this.setState({ arr: data.arr });
+          this.setState({ arr: getDealKey(data.arr) });
         } else if (data.code === -2) {
           this.error(data.msg);
         }
@@ -219,7 +235,7 @@ class Users extends Component {
   strChange = val => {
     if (!val.target.value) {
       getDataArr("user?act=getAllUser").then(data => {
-        this.setState({ arr: data.arr });
+        this.setState({ arr:getDealKey( data.arr) });
       });
     }
   };
@@ -229,7 +245,7 @@ class Users extends Component {
     getDataArr("user?act=del&id=" + id).then(data => {
       message.success(data.msg);
       getDataArr("user?act=getAllUser").then(data => {
-        this.setState({ arr: data.arr });
+        this.setState({ arr: getDealKey(data.arr) });
       });
      
     });
@@ -252,13 +268,13 @@ class Users extends Component {
       switch(values.Formkey){
         case 'addUser':
         let adder = getCookie('user')
-        getDataArr('user?act=add&username='+values.username+'&password='+values.password+'&adder='+adder+'&email='+values.email+'&phone='+values.phone).then(data => {
+        getDataArr('user?act=add&username='+values.username+'&password='+values.password+'&adder='+adder+'&email='+values.email+'&phone='+values.phone+'&sex='+values.sex).then(data => {
          
           if(data.code ===0){
             message.success(data.msg);
               getDataArr("user?act=getAllUser").then(data => {
-                  console.log(data.arr)
-                  this.setState({ arr: data.arr });
+                 
+                  this.setState({ arr:getDealKey( data.arr) });
                 });
                 form.resetFields();
                 this.setState({ visible: false });
@@ -277,14 +293,15 @@ class Users extends Component {
         passund = '&password='+ values.editpass
 
        }
+       console.log(values.sex)
       
-        getDataArr('user?act=userUpdate&key='+values.userKey+passund+'&email='+values.editemail+'&phone='+values.editphone)
+        getDataArr('user?act=userUpdate&key='+values.userKey+passund+'&email='+values.editemail+'&phone='+values.editphone+'&sex='+values.sex)
         .then(data=>{
           if(data.code ===0){
             message.success(data.msg);
             getDataArr("user?act=getAllUser").then(data => {
               console.log(data.arr)
-              this.setState({ arr: data.arr });
+              this.setState({ arr: getDealKey(data.arr) });
             });
             form.resetFields();
             this.setState({ visible: false });

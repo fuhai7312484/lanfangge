@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
-import { Form, Input, Modal , Row, Col,Alert } from "antd";
+import { Form, Input, Modal , Row, Col,Alert,Radio } from "antd";
 import { getDataArr} from "../../lib/myStorage";
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 
 class EditForm extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class EditForm extends Component {
       editphone:0,
       editusstate:true,
       updatakey:0,
+      editSex:''
 
     };
     
@@ -23,17 +25,16 @@ class EditForm extends Component {
 
   async componentDidMount() {
     let {editIndex} = this.props;
-
     await getDataArr("user?act=getOneUser&username="+ editIndex)
     .then(data => {
-      
       this.setState({ dataArr:data.arr,
         nameVal:data.arr[0].username,
         editpass:data.arr[0].password,
         editemail:data.arr[0].adminEmail,
         editphone:data.arr[0].adminPhone,
         editusstate:data.arr[0].userstate,
-        updatakey:data.arr[0].key,
+        updatakey:data.arr[0].id,
+        editSex:data.arr[0].sex,
        })
       // this.setState({ dataArr:data.arr });
     });
@@ -51,22 +52,18 @@ class EditForm extends Component {
         editemail:data.arr[0].adminEmail,
         editphone:data.arr[0].adminPhone,
         editusstate:data.arr[0].userstate,
-        updatakey:data.arr[0].key,
+        updatakey:data.arr[0].id,
+        editSex:data.arr[0].sex,
        })
       // this.setState({ dataArr:data.arr });
     });
   }
 
-  componentWillUnmount(){
-   
-
-
-  }
 
   render() {
     
     const { visible, onCancel, onCreate,editIndex,form,getFieldDecorator } = this.props;
-    let {dataArr,nameVal,editpass,editemail,editphone,editusstate,updatakey} = this.state
+    let {dataArr,nameVal,editpass,editSex,editemail,editphone,editusstate,updatakey} = this.state
   
     const formItemLayout = {
       labelCol: {
@@ -160,6 +157,20 @@ class EditForm extends Component {
                     })(<Input type="password" />)}
           
                   </FormItem>
+                  <FormItem
+          {...formItemLayout}
+          label="性别"
+        >
+          {getFieldDecorator('sex', {
+                initialValue: editSex,
+              })(
+            <RadioGroup>
+              <Radio value='男'>男</Radio>
+              <Radio value='女'>女</Radio>
+             
+            </RadioGroup>
+          )}
+        </FormItem>
                  
                   <FormItem {...formItemLayout} label="邮箱" hasFeedback className="ant-form-margin">
                     {getFieldDecorator("editemail", {

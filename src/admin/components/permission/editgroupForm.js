@@ -20,14 +20,12 @@ class Editgroup extends Component {
   async componentDidMount() {
     let {editIndex} = this.props;
     editIndex = editIndex==null?0:editIndex;
-    console.log(editIndex)
-
-    await getDataArr("group?act=get&pid="+ editIndex)
+    await getDataArr("group?act=get&id="+ editIndex)
     .then(data => {
-        console.log(data)
+   
       
       this.setState({
-        pidVal:data.pid,
+        pidVal:data.id,
         pnameVal:data.pname,
         pdescVal:data.pdesc,
         pstate:data.pstate,
@@ -39,12 +37,12 @@ class Editgroup extends Component {
 
   async componentWillReceiveProps(props) {
     let {editIndex,visible} = props;
-    await getDataArr("group?act=get&pid="+ editIndex)
+    await getDataArr("group?act=get&id="+ editIndex)
     .then(data => {
-        console.log(data)
+      
       
       this.setState({
-        pidVal:data.pid,
+        pidVal:data.id,
         pnameVal:data.pname,
         pdescVal:data.pdesc,
         pstate:data.pstate,
@@ -95,7 +93,7 @@ class Editgroup extends Component {
                     })(<Input disabled hidden />)}
 
 
-                     {getFieldDecorator("pid", {
+                     {getFieldDecorator("id", {
                       rules: [
                         {
                           required: false,
@@ -103,7 +101,7 @@ class Editgroup extends Component {
                         }
                       ],
                       initialValue:pidVal,
-                    })(<Input disabled />)}
+                    })(<Input disabled hidden />)}
 
       <FormItem label="用户组名称" hasFeedback {...formItemLayout} className="ant-form-margin">
                     {getFieldDecorator("pname", {

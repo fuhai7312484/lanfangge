@@ -16,7 +16,7 @@ import Editgroup from "./editgroupForm";
 // import { spawn } from 'child_process';
 import { getDataArr,getDealKey } from "../../lib/myStorage.js";
 
-const { Header, Footer, Content, Sider } = Layout;
+const { Header, Footer, Content } = Layout;
 class Usergroup extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +47,7 @@ class Usergroup extends Component {
               <a href="javascript:;"
                title="编辑"
                onClick={() => {
-                this.showModal('editgroup',res.pid)
+                this.showModal('editgroup',res.id)
                 
               }}
                >
@@ -55,7 +55,7 @@ class Usergroup extends Component {
               </a>
               <Divider type="vertical" />
 
-              {res.pid ? (
+              {res.pstate ? (
                 <Popconfirm
                   title="确定要删除该组？?"
                   okText="确定"
@@ -116,8 +116,6 @@ class Usergroup extends Component {
   };
   //点击打开对话框
   showModal = (index, resIndex) => {
-    // console.log(index,resIndex)
-
     this.setState({
       visible: true,
       ModalIndex: index,
@@ -132,12 +130,11 @@ class Usergroup extends Component {
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
-
+//判断当前点击的是哪个弹框
   ModeShow(){
     // let {visible, onCancel,editIndex,onCreate,ModalIndex,form} = this.props;
     // const { getFieldDecorator } = form;
     let {visible,ModalIndex,editIndex} =this.state;
-
     switch (ModalIndex) {
       case 'addgroup':
     return <Addgroup
@@ -173,15 +170,10 @@ class Usergroup extends Component {
           this.setState({ groupArr:getDealKey(data.groupArr) });
         });
   });
-
-    console.log(id)
-
-
   }
 
 //点击弹框的确定按钮的回调函数
   handleCreate = () => {
-   
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
@@ -191,6 +183,7 @@ class Usergroup extends Component {
       // console.log('Received values of form: ', values);
 
       switch (values.Formkey) {
+     
         case "addgroup":
        let pdesc = values.pdesc==undefined?'':values.pdesc;
           getDataArr(
@@ -199,7 +192,7 @@ class Usergroup extends Component {
             if (data.code === 0) {
               message.success(data.msg);
               getDataArr("group?act=get").then(data => {
-                this.setState({ groupArr: data.groupArr });
+                this.setState({ groupArr:getDealKey(data.groupArr) });
               });
               form.resetFields();
               this.setState({ visible: false });
@@ -213,6 +206,21 @@ class Usergroup extends Component {
           break;
           case 'editgroup':
           console.log(values)
+          let pdesc2 = values.pdesc==undefined?'':values.pdesc;
+          getDataArr('group?act=add&id='+values.id+'&grname=' + values.pname + '&grdesc=' + pdesc2)
+          .then(data=>{
+            if (data.code === 0) {
+              message.success(data.msg);
+              getDataArr("group?act=get").then(data => {
+                this.setState({ groupArr:getDealKey(data.groupArr) });
+              });
+              form.resetFields();
+              this.setState({ visible: false });
+            }else if (data.code === -1) {
+              message.success(data.msg);
+            }
+
+          })
           break;
       }
     });

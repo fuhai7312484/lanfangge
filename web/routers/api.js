@@ -6,7 +6,7 @@ let express = require("express");
 let router = express.Router();
 let User = require("../models/user");
 let Weibo = require("../models/weibo");
-let List = require("../models/list");
+let AdminList = require("../models/adminlist");
 let Group = require("../models/group");
 let multiparty = require("multiparty");
 let fs = require("fs");
@@ -118,58 +118,86 @@ router.post("/upload", (req, res, next) => {
   });
 });
 
-
-
-//gooup权限接口
+//group权限接口
 router.get("/group", (req, res, next) => {
   let act = req.query.act;
-  let grname,pid;
+  let grname, key;
   switch (act) {
     case "add":
       grname = req.query.grname;
-      if (!grname) {
-        resData.code = -1;
-        resData.msg = "用户组名不能为空";
-        res.json(resData);
-      } else {
-        Group.findOne({ pname: grname }, (err, data) => {
-          if (data && grname == data.pname) {
-            resData.code = -3;
-            resData.msg = "已存在用户组";
-            res.json(resData);
-          } else {
-            Group.find({}, (err, data) => {
-              let pid = data.length + 1;
+      key = req.query.id;
+
+      if (key) {
+        Group.findOne({ _id: key }, (err, data) => {
+          if (!err) {
+            if (!grname) {
+              resData.code = -1;
+              resData.msg = "用户组名不能为空";
+              res.json(resData);
+            } else {
               let grdesc = req.query.grdesc || null;
-              let group = new Group({
-              
-                pid: pid,
+              let grstate = req.query.grstate || true;
+              let upObj = {
                 pname: grname,
                 pdesc: grdesc,
-                pstate: true
+                pstate: grstate
+              };
+              Group.update({ _id: key }, upObj, (err, data) => {
+                if (!err) {
+                  resData.code = 0;
+                  resData.msg = "更新成功！";
+                  resData.upObj = upObj;
+                  res.json(resData);
+                } else {
+                  resData.code = -1;
+                  resData.msg = "更新失败";
+                  res.json(resData);
+                }
               });
-              group.save((err, newgroup) => {
-                resData.code = 0;
-                resData.msg = "创建用户组成功！";
-                resData.pid = newgroup.pid;
-                resData.pname = newgroup.pname;
-                resData.pdesc = newgroup.pdesc;
-                resData.pstate = newgroup.pstate;
-                res.json(resData);
-              });
-            });
+            }
           }
         });
+      } else {
+        if (!grname) {
+          resData.code = -1;
+          resData.msg = "用户组名不能为空";
+          res.json(resData);
+        } else {
+          Group.findOne({ pname: grname }, (err, data) => {
+            if (data && grname == data.pname) {
+              resData.code = -3;
+              resData.msg = "已存在用户组";
+              res.json(resData);
+            } else {
+              Group.find({}, (err, data) => {
+                let grdesc = req.query.grdesc || null;
+                let group = new Group({
+                  pname: grname,
+                  pdesc: grdesc,
+                  pstate: true
+                });
+                group.save((err, newgroup) => {
+                  resData.code = 0;
+                  resData.msg = "创建用户组成功！";
+                  resData.pname = newgroup.pname;
+                  resData.pdesc = newgroup.pdesc;
+                  resData.pstate = newgroup.pstate;
+                  res.json(resData);
+                });
+              });
+            }
+          });
+        }
       }
+
       break;
     case "get":
-      pid = req.query.pid;
-      if (pid) {
-        Group.findOne({ pid: pid }, (err, data) => {
+      key = req.query.id;
+      if (key) {
+        Group.findOne({ _id: key }, (err, data) => {
           if (!err) {
             resData.code = 0;
             resData.id = data.id;
-            resData.pid = data.pid;
             resData.pname = data.pname;
             resData.pdesc = data.pdesc;
             resData.pstate = data.pstate;
@@ -181,7 +209,6 @@ router.get("/group", (req, res, next) => {
             res.json(resData);
           }
         });
-       
       } else {
         Group.find({}, (err, data) => {
           if (!err) {
@@ -192,7 +219,6 @@ router.get("/group", (req, res, next) => {
             for (let o of data) {
               let obj = {
                 id: o.id,
-                pid: o.pid,
                 pname: o.pname,
                 pdesc: o.pdesc,
                 pstate: o.pstate
@@ -209,60 +235,130 @@ router.get("/group", (req, res, next) => {
         });
       }
       break;
-      case 'delgroup':
-      let id = req.query.id;
-      console.log(id)
-      if(!id){
-        resData.code = -3;
-        resData.msg = "参数错误！或者当前用户不可删除" ;
-        res.json(resData);
-      }else{
-        Group.remove({ _id: id }, err => {
-          if (!err) {
-            resData.code = 0;
-            resData.msg = "用户组删除成功";
-            res.json(resData);
-          } else {
-            resData.code = -1;
-            resData.msg = "删除失败";
-            res.json(resData);
-          }
-        });
+    case "delgroup":
+      key = req.query.id;
 
-      }
-    
+      Group.remove({ _id: key }, err => {
+        if (!err) {
+          resData.code = 0;
+          resData.msg = "用户组删除成功";
+          res.json(resData);
+        } else {
+          resData.code = -1;
+          resData.msg = "删除失败";
+          res.json(resData);
+        }
+      });
+
       break;
   }
 });
 
-//list接口
-router.get("/list", (req, res, next) => {
+//adminlist接口
+router.get("/adminlist", (req, res, next) => {
   let act = req.query.act;
-  let listid, newname;
+  let adminName, password;
   switch (act) {
     case "add":
-      newname = req.query.newname;
-      listid = req.query.listid;
-      if (!newname) {
-      
+      adminName = req.query.name;
+      password = req.query.pass;
+      if (!adminName) {
         resData.code = -1;
-        resData.msg = "参数错误";
+        resData.msg = "账号不能为空";
         res.json(resData);
       } else {
-        newname = newname.replace("\n", "");
-        let list = new List({
-          newname: newname,
-          listid: listid
-        });
-        list.save((err, newlist) => {
-          resData.code = 0;
-          resData.msg = "提交成功！";
-          resData.newName = newlist.newname;
-          resData.listid = newlist.listid;
-          resData.id = newlist.id;
-          res.json(resData);
+        AdminList.findOne({ adminName: adminName }, (err, data) => {
+          if (data && adminName == data.username) {
+            resData.code = -3;
+            resData.msg = "用户名有相同不能注册";
+            res.json(resData);
+          } else {
+            if (!password) {
+              resData.code = -2;
+              resData.msg = "密码不能为空";
+              res.json(resData);
+            } else {
+              adminName = adminName.replace("\n", "");
+              let time = +new Date();
+              let adminemail = req.query.email || null;
+              let groupsId = req.query.pid;
+              let groupsName = req.query.pname;
+              let list = new AdminList({
+                adminName: adminName,
+                password: password,
+                time: time,
+                adminemail: adminemail,
+                groupsId: groupsId,
+                groupsName: groupsName
+              });
+              list.save((err, newlist) => {
+                resData.code = 0;
+                resData.msg = "提交成功！";
+                resData.adminName = newlist.adminName;
+                resData.password = newlist.password;
+                resData.time = newlist.time;
+                resData.adminemail = newlist.adminemail;
+                resData.groupsId = newlist.groupsId;
+                resData.groupsName = newlist.groupsName;
+                resData.id = newlist.id;
+                res.json(resData);
+              });
+            }
+          }
         });
       }
+      break;
+    case "get":
+      let key = req.query.id;
+      if (!key) {
+        AdminList.find({}, (err, data) => {
+          if (!err) {
+            resData.code = 0;
+            resData.msg = "查询成功";
+            let arr = [];
+            for (let o of data) {
+              let obj = {
+                time: o.time,
+                id: o.id,
+                adminName: o.adminName,
+                password: o.password,
+                adminemail: o.adminemail,
+                adminPhone: o.adminPhone,
+                groupsId: o.groupsId,
+                groupsName: o.groupsName,
+
+              };
+              arr.push(obj);
+            }
+            resData.arr = arr;
+            res.json(resData);
+          } else {
+            resData.code = -1;
+            resData.msg = "查询失败";
+            res.json(resData);
+          }
+        });
+      } else {
+        AdminList.findOne({ _id: key }, (err, data) => {
+          if (!err) {
+            resData.code = 0;
+            resData.msg = "查询成功";
+            resData.adminName = data.adminName;
+            resData.password = data.password;
+            resData.time = data.time;
+            resData.adminemail = data.adminemail;
+            resData.groupsId = data.groupsId;
+            resData.groupsName = data.groupsName;
+            resData.id = data.id;
+            res.json(resData);
+          } else {
+            resData.code = -1;
+            resData.msg = "查询失败";
+            res.json(resData);
+          }
+        });
+      }
+
       break;
   }
 });
@@ -296,22 +392,23 @@ router.get("/user", (req, res, next) => {
                 let adminEmail = req.query.email || null;
                 let adminPhone = req.query.phone || null;
                 let adder = req.query.adder || "注册用户";
-                let userstate = req.query.userstate || true;
                 let sex = req.query.sex;
-              
+                let userstate = req.query.userstate || true;
+
                 let user = new User({
                   username: username,
                   password: password,
+                  sex: sex,
                   adminEmail: adminEmail,
                   adminPhone: adminPhone,
                   adder: adder,
                   time: time,
-                  sex:sex,
                   userstate: userstate
                 });
                 user.save((err, newuser) => {
                   resData.code = 0;
                   resData.msg = "提交成功！";
+
                   resData.username = newuser.username;
                   resData.password = newuser.password;
                   resData.adminEmail = newuser.adminEmail;
@@ -344,7 +441,7 @@ router.get("/user", (req, res, next) => {
           let upObj = {
             adminEmail: adminEmail,
             adminPhone: adminPhone,
-            sex:sex,
+            sex: sex,
             password: password,
             userstate: userstate
           };
@@ -353,7 +450,7 @@ router.get("/user", (req, res, next) => {
               resData.code = 0;
               resData.msg = "更新成功！";
               resData.upObj = upObj;
-              resData.id = data.id;
+
               res.json(resData);
             } else {
               resData.code = -1;
@@ -366,7 +463,7 @@ router.get("/user", (req, res, next) => {
       break;
     case "updataState":
       // let userstate = req.query.userstate;
-      id = req.query.key;
+      key = req.query.key;
       let userstate = req.query.userstate;
       User.update({ _id: key }, { userstate: userstate }, (err, data) => {
         if (!err) {
@@ -409,14 +506,14 @@ router.get("/user", (req, res, next) => {
           let arr = [];
           for (let o of data) {
             let obj = {
+              time: o.time,
               id: o.id,
+              sex: o.sex,
               username: o.username,
               password: o.password,
               adminEmail: o.adminEmail,
               adminPhone: o.adminPhone,
-              sex:o.sex,
               adder: o.adder,
-              time:o.time,
               userstate: o.userstate
             };
             arr.push(obj);
@@ -442,16 +539,18 @@ router.get("/user", (req, res, next) => {
           } else {
             resData.code = 0;
             resData.msg = "查询成功";
+
             let arr = [];
+
             let obj = {
+              time: data.time,
               id: data.id,
-              sex:data.sex,
+              sex: data.sex,
               username: data.username,
               password: data.password,
               adminEmail: data.adminEmail,
               adminPhone: data.adminPhone,
               adder: data.adder,
-              time:data.time,
               userstate: data.userstate
             };
             arr.push(obj);

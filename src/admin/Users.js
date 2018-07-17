@@ -16,7 +16,7 @@ import {
   Button,
   Popconfirm,
   Switch,
-  Breadcrumb 
+  Breadcrumb,
 } from "antd";
 const { Header, Footer, Content } = Layout;
 const Search = Input.Search;
@@ -83,7 +83,7 @@ class Users extends Component {
           render:(text,res)=>(
          
             <span>
-             
+           
              { getToTime(res.time,'/')}
               </span>
            
@@ -140,12 +140,19 @@ class Users extends Component {
   }
 
   async componentDidMount() {
+ 
    await getDataArr("user?act=getAllUser").then(data => {
-     console.log(getToTime(data.arr[1].time,'/'))
+    //  console.log(getToTime(data.arr[1].time,'/'))
     
       this.setState({ arr:getDealKey(data.arr) });
     });
   
+    console.log('组件加载完成！')
+  }
+
+  componentWillMount(){
+
+    console.log('组件加载中~~~')
   }
 
   //激活会员状态事件
@@ -293,7 +300,7 @@ class Users extends Component {
         passund = '&password='+ values.editpass
 
        }
-       console.log(values.sex)
+       console.log(values.userKey)
       
         getDataArr('user?act=userUpdate&key='+values.userKey+passund+'&email='+values.editemail+'&phone='+values.editphone+'&sex='+values.sex)
         .then(data=>{

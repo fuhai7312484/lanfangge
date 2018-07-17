@@ -85,17 +85,15 @@ user
 
 
 
-list
-添加list数据  /list
-
-	get 
-		act		add
-		newname		输入的内容
-	return 
-		code  0为成功
-		msg     提示信息
-		newname		输入的信息
-		listid 		可选参数  listid
+/adminlist
+添加admin数据  /adminlist?act=add&name=admin&pass=123456&pid=5b45f91a385cee409c9acdd9&pname=超级管理员组
+		pid为权限组的父id pname为权限组的父组名称
+		可选参数&email
+	return  code -1   msg 账号不能为空
+		code -3	  msg 用户名有相同不能注册
+		code 0    msg 提交成功
+		
+	
 查询list  /list
 
 	get 

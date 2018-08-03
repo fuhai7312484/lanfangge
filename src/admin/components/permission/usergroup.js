@@ -95,9 +95,12 @@ class Usergroup extends Component {
   }
 
   async componentDidMount() {
+   
     await getDataArr("group?act=get").then(data => {
       this.setState({ groupArr: getDealKey(data.groupArr) });
     });
+
+   
   }
 
   //错误提示信息
@@ -186,6 +189,7 @@ class Usergroup extends Component {
      
         case "addgroup":
        let pdesc = values.pdesc==undefined?'':values.pdesc;
+       console.log(values)
           getDataArr(
             "group?act=add&grname=" + values.pname + "&grdesc=" + pdesc
           ).then(data => {
@@ -195,7 +199,7 @@ class Usergroup extends Component {
                 this.setState({ groupArr:getDealKey(data.groupArr) });
               });
               form.resetFields();
-              this.setState({ visible: false });
+              // this.setState({ visible: false });
             } else if (data.code === -3) {
               message.success(data.msg);
             } else if (data.code === -1) {
@@ -230,7 +234,8 @@ class Usergroup extends Component {
     let { collapsed, groupArr, columns, visible } = this.state;
 
     let { history } = this.props;
-
+ 
+    console.log(groupArr)
     return (
       <Layout>
         <ToLeftmenu

@@ -82,6 +82,14 @@ user
 删除权限组接口/group?act=delgroup&pid=0 
 
 
+添加管理员 /group?act=addAdmin&id=管理员组id&name=admin&pass=12345
+		可选参数&email=1234@qq.com
+			
+			return code -1 msg 请选择要添加的组
+			return code -2 msg 用户名不能为空！
+			return code -3 msg 用户名已存在！！
+			return  code -4 msg 密码不能为空！
+			return  code -5 msg 更新失败！
 
 
 
@@ -92,7 +100,15 @@ user
 	return  code -1   msg 账号不能为空
 		code -3	  msg 用户名有相同不能注册
 		code 0    msg 提交成功
+获取adminlist 数据/adminlist?act=get  获取全部列表
 		
+		/adminlist?act=get&id=id  获取当前id的一个数据
+		return code 0 msg 查询成功
+			code -1 msg 查询失败
+删除admin /adminlist?act=del&id=id  
+		return code 0 msg 用户删除成功 
+ 		return code -1 msg 删除失败
+
 	
 查询list  /list
 

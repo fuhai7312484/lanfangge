@@ -126,7 +126,6 @@ router.get("/group", (req, res, next) => {
     case "add":
       grname = req.query.grname;
       key = req.query.id;
-
       if (key) {
         Group.findOne({ _id: key }, (err, data) => {
           if (!err) {
@@ -171,9 +170,11 @@ router.get("/group", (req, res, next) => {
             } else {
               Group.find({}, (err, data) => {
                 let grdesc = req.query.grdesc || null;
+                let members = [];
                 let group = new Group({
                   pname: grname,
                   pdesc: grdesc,
+                  members:members,
                   pstate: true
                 });
                 group.save((err, newgroup) => {
@@ -181,6 +182,7 @@ router.get("/group", (req, res, next) => {
                   resData.msg = "创建用户组成功！";
                   resData.pname = newgroup.pname;
                   resData.pdesc = newgroup.pdesc;
+                  resData.members = newgroup.members;
                   resData.pstate = newgroup.pstate;
                   res.json(resData);
                 });
@@ -190,6 +192,81 @@ router.get("/group", (req, res, next) => {
         }
       }
 
+      break;
+      case'addAdmin':
+      let pid=req.query.id;
+      let adminName=req.query.name;
+      let password = req.query.pass;
+      if(!pid){
+        resData.code = -1;
+        resData.msg = '请选择要添加的组';
+        res.json(resData);
+      }else{
+        Group.findOne({_id:pid},(err,data)=>{
+          if(!err){
+
+            if(!adminName){
+                  resData.code = -2;
+                  resData.msg = '用户名不能为空！';
+                  res.json(resData);
+              }else{
+
+                Group.find({"members.adminName":adminName},(err,namedata)=>{
+                  // console.log(namedata[0].members)
+                  if(namedata.length===0){
+                    if(!password){
+                      resData.code = -4;
+                      resData.msg = '密码不能为空！';
+                      res.json(resData);
+                    }else{
+
+                      let adminemail = req.query.email || null;
+                              let id = +new Date();
+                              let time = +new Date();
+                              let obj = {
+                                id:id,
+                                pid:pid,
+                                time:time,
+                                adminName:adminName,
+                                password:password,
+                                adminemail:adminemail,
+                              };
+                         Group.update({_id:pid},{ $addToSet:{ members:obj} } ,(err, newlist) => {
+                          if (!err) {
+                            console.log(newlist)
+                            resData.code = 0;
+                            resData.msg = "更新成功！";
+                            resData.pid = pid;
+                            resData.members = obj;
+                            res.json(resData);
+                          } else {
+                            resData.code = -5;
+                            resData.msg = "更新失败";
+                            res.json(resData);
+                          }
+                        });
+                    }
+                   
+                  }else{
+                   resData.code = -3;
+                    resData.msg = '用户名已存在！';
+                    res.json(resData);
+                  }
+
+                })
+                
+              }
+          }else{
+            console.log('没有这个组！！');
+
+             resData.code = -5;
+                resData.msg = '没有该组请先创建组！再添加管理员!';
+                res.json(resData);
+
+          }
+
+        })
+      }
       break;
     case "get":
       key = req.query.id;
@@ -201,6 +278,7 @@ router.get("/group", (req, res, next) => {
             resData.pname = data.pname;
             resData.pdesc = data.pdesc;
             resData.pstate = data.pstate;
+            resData.members = data.members;
             resData.msg = "查询成功";
             res.json(resData);
           } else {
@@ -221,7 +299,9 @@ router.get("/group", (req, res, next) => {
                 id: o.id,
                 pname: o.pname,
                 pdesc: o.pdesc,
-                pstate: o.pstate
+                pstate: o.pstate,
+                members:o.members,
+
               };
               groupArr.push(obj);
             }
@@ -235,6 +315,11 @@ router.get("/group", (req, res, next) => {
         });
       }
       break;
+      // case 'deladmin':
+      // let key = req.query.id
+
+
+      // break;
     case "delgroup":
       key = req.query.id;
 
@@ -359,6 +444,20 @@ router.get("/adminlist", (req, res, next) => {
         });
       }
 
+      break;
+      case 'del':
+      let id = req.query.id;
+      AdminList.remove({ _id: id }, err => {
+        if (!err) {
+          resData.code = 0;
+          resData.msg = "用户删除成功";
+          res.json(resData);
+        } else {
+          resData.code = -1;
+          resData.msg = "删除失败";
+          res.json(resData);
+        }
+      });
       break;
   }
 });

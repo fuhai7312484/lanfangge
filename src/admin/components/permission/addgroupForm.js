@@ -1,13 +1,18 @@
 
 import React, {Component} from 'react';
-import {Modal,Row,Col,Form,Input} from 'antd';
+import {Modal,Row,Col,Form,Input,DatePicker} from 'antd';
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+
 const FormItem = Form.Item;
 const { TextArea } = Input;
 class Addgroup extends Component {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = { 
+          timevalue:'',
+         };
     }
+  
     render() {
         let {visible,Cancel,onCreate,form} = this.props;
         const { getFieldDecorator } = form;
@@ -71,7 +76,14 @@ class Addgroup extends Component {
                     })( <TextArea rows={4} />)}
                   </FormItem>
 
-                 
+                   {/* {getFieldDecorator("aa", {
+                      rules: [
+                        {
+                          required: false,
+                         
+                        }
+                      ]
+                    })(<DatePicker/>)} */}
 
 
               </Form>

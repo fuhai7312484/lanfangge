@@ -10,31 +10,39 @@ class Addadmin extends Component {
         this.state = { 
           groupArr:[],
           pid:'',
+          groupname:'',
 
          };
     }
    async componentDidMount(){
-     let {groupArr,pid} = this.state;
+     let {groupArr,pid,groupname} = this.state;
     await getDataArr('/group?act=get')
     .then(data=>{
-      console.log(data.groupArr[1].id)
-        this.setState({ groupArr: getDealKey(data.groupArr),pid:data.groupArr[1].id});
+        this.setState({ groupArr: getDealKey(data.groupArr),
+          pid:data.groupArr[1].id,
+          groupname:data.groupArr[1].pname});
     })
 
     }
 
     handleChange=(value)=>{
-      let {pid} = this.state;
-      console.log(`selected ${value}`);
-      this.setState({pid:value})
+      let {pid,groupname,groupArr} = this.state;
+     
+     let newPname = groupArr.filter(e=>{
+            return e.id === value
+          })
+      // console.log(newPname)
+
+      // console.log(`selected ${value}`);
+      this.setState({pid:value,groupname:newPname[0].pname})
       
     }
 
     render() {
         let {visible,Cancel,onCreate,form} = this.props;
         const { getFieldDecorator } = form;
-        let {groupArr,pid} = this.state;
-       console.log(pid)
+        let {groupArr,pid,groupname} = this.state;
+      //  console.log(pid,groupname)
         let newArr = groupArr.map((e,i)=>{
           return <Option key={e.id} value={e.id}>{e.pname}</Option>;
 
@@ -84,6 +92,17 @@ class Addadmin extends Component {
                       ],
                       initialValue:pid,
                     })(<Input disabled hidden />)}
+                    
+
+                        {getFieldDecorator("groupsname", {
+                      rules: [
+                        {
+                          required: false,
+                          
+                        }
+                      ],
+                      initialValue:groupname,
+                    })(<Input disabled hidden />)}
 
       <FormItem label="管理员名称" hasFeedback {...formItemLayout} className="ant-form-margin">
                     {getFieldDecorator("name", {
@@ -130,9 +149,7 @@ class Addadmin extends Component {
               })(
                 <Select onChange={this.handleChange}>
                 {newArr}
-                  {/* <Option value="超级管理员组">超级管理员组</Option>
-                  <Option value="普通用户组">普通用户组</Option>
-                  */}
+     
                 </Select>
               )}
             </FormItem>

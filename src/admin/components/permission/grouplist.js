@@ -33,8 +33,8 @@ class Grouplist extends Component {
             },
             {
               title:'所在管理组',
-              key:'groupsName',
-              dataIndex:'groupsName'
+              key:'pname',
+              dataIndex:'pname'
 
             },
             {
@@ -84,7 +84,7 @@ class Grouplist extends Component {
     title="确定要删除该组？?"
     okText="确定"
     cancelText="取消"
-    // onConfirm={()=>this.delGroup(res.id)}
+    onConfirm={()=>this.deladmin(res.id)}
   >
     <a href="javascript:;" title="删除">
       <Icon type="delete" />
@@ -122,11 +122,45 @@ class Grouplist extends Component {
     });
   };
   async componentDidMount() {
-    await getDataArr("/adminlist?act=get").then(data => {
-      this.setState({ adminList: getDealKey(data.arr) });
+    await getDataArr("/group?act=get").then(data => {
+
+      let allMerArr = data.groupArr.map((e,i) => {
+        e.members.forEach(el=>{
+          el.pid=e.id;
+          el.pname = e.pname;
+        })
+        return e.members;
+        
+      });
+   
+    
+      let newArr=[]
+      allMerArr.forEach(e => {
+        e.forEach(el=>{
+          newArr.push(el)
+        })
+      });
+      console.log(newArr)
+    
+     
+      this.setState({ adminList: getDealKey(newArr) });
     });
   }
+//删除管理员
+deladmin=(index)=>{
+  getDataArr('adminlist?act=del&id='+index)
+  .then(data=>{
+    if(data.code === 0){
+      message.success(data.msg);
+      getDataArr('adminlist?act=get').then(data=>{
+        this.setState({ adminList: getDealKey(data.arr) });
+      })
+    }
 
+  })
+
+
+}
     //点击打开对话框
     showModal = (index, resIndex) => {
       this.setState({
@@ -199,6 +233,23 @@ class Grouplist extends Component {
      
         case "addadmin":
         console.log('添加管理员',values)
+
+        getDataArr('adminlist?act=add&name='+values.name+'&pass='+values.pass+'&pid='+values.groupsId+'&pname='+values.groupsname)
+        .then(data=>{
+          if (data.code === 0) {
+            message.success(data.msg);
+            getDataArr("adminlist?act=get").then(data => {
+                        this.setState({ adminList:getDealKey(data.arr) });
+                      });
+                      form.resetFields();
+              this.setState({ visible: false });
+
+          }else{
+
+
+          }
+
+        })
       //  let pdesc = values.pdesc==undefined?'':values.pdesc;
       //     getDataArr(
       //       "group?act=add&grname=" + values.pname + "&grdesc=" + pdesc

@@ -19,11 +19,14 @@ export function rmCookie(name) {
 }
 //url接口获取数据
 export function getDataArr(url) {
-  let arrData = fetch("http://localhost:88/api/" + url).then(e => {
+  let arrData = fetch("http://localhost:88/api/" + url)
+  .then(e => {
     return e.json();
   });
   return arrData;
 }
+
+
 
 //设置localStorage
 export function set(key, val, time) {
